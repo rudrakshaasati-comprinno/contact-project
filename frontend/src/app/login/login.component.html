@@ -1,0 +1,81 @@
+<div class="login-container">
+  <div class="login-card">
+    <!-- LEFT IMAGE SECTION -->
+    <div class="login-image d-none d-md-flex">
+      <h2>👋 Welcome Back!</h2>
+      <p>
+        Manage your contacts securely <br>
+        with ease & confidence 📇✨
+      </p>
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+        alt="login"
+        class="img-fluid">
+    </div>
+
+    <!-- RIGHT FORM SECTION -->
+    <div class="login-form">
+      <h3>🔐 Login</h3>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+        <!-- EMAIL -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email"
+                 id="email"
+                 formControlName="email"
+                 placeholder="Enter your email">
+
+          <small class="error-message"
+            *ngIf="loginForm.get('email')?.touched &&
+                   loginForm.get('email')?.invalid">
+            <span *ngIf="loginForm.get('email')?.errors?.['required']">
+              Email is required
+            </span>
+            <span *ngIf="loginForm.get('email')?.errors?.['email']">
+              Enter a valid email
+            </span>
+          </small>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password"
+                 id="password"
+                 formControlName="password"
+                 placeholder="Enter your password">
+
+          <small class="error-message"
+            *ngIf="loginForm.get('password')?.touched &&
+                   loginForm.get('password')?.invalid">
+            Password is required
+          </small>
+        </div>
+
+        <!-- BUTTON -->
+        <button class="submit-button"
+                [disabled]="loginForm.invalid || loading"
+                type="submit">
+          <span *ngIf="!loading">🚀 Login</span>
+          <span *ngIf="loading">⏳ Logging in...</span>
+        </button>
+
+        <!-- ERROR MESSAGE -->
+        <div *ngIf="errorMessage" class="alert alert-danger mt-3" style="border-radius: 8px;">
+          {{ errorMessage }}
+        </div>
+
+      </form>
+
+      <!-- REGISTER LINK -->
+      <div class="login-footer">
+        <p>Not a user?
+          <a routerLink="/register">Register here ✨</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
